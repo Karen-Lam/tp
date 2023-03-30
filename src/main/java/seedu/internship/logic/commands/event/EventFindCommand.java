@@ -11,6 +11,7 @@ import seedu.internship.model.event.*;
 import seedu.internship.model.internship.Internship;
 import seedu.internship.model.ModelManager.*;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -24,7 +25,7 @@ public class EventFindCommand extends EventCommand {
             + "Parameters: [" + PREFIX_EVENT_NAME + "NAME] "
             + "[" + PREFIX_EVENT_START + "START] "
             + "[" + PREFIX_EVENT_END + "END] "
-            + "Example: " + COMMAND_WORD + " na/Technical Interview" + "st/10/09/2023 1500" ;
+            + "Example: " + COMMAND_WORD + " na/Technical";
 
     public static final String MESSAGE_SUCCESS = "Found events : %1$s";
 
@@ -42,22 +43,23 @@ public class EventFindCommand extends EventCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Predicate<Event> filterName = unused -> true;
-        Predicate<Event> filterStart = unused -> true;
-        Predicate<Event> filterEnd = unused -> true;
+        Predicate<Event> filterTiming = unused -> true;
+
         if (filterEventDescriptor.getName().isPresent()) {
             filterName = x -> x.getName().name.toLowerCase().contains(filterEventDescriptor.getName()
                     .get().name.toLowerCase());
         }
-        if (filterEventDescriptor.getStart().isPresent()) {
-            filterStart = x -> x.getStart().equals(filterEventDescriptor.getStart().get());
-        }
-        if (filterEventDescriptor.getEnd().isPresent()) {
-            filterEnd = x -> x.getEnd().equals(filterEventDescriptor.getEnd().get());
+        if (filterEventDescriptor.getStart().isPresent() && filterEventDescriptor.getEnd().isPresent()) {
+            filterTiming = x -> x.isBetweenStartEnd(filterEventDescriptor.getStart().get(),
+                    filterEventDescriptor.getEnd().get());
+        } else if (filterEventDescriptor.getStart().isPresent()) {
+            filterTiming = x -> x.isAfterOrEquals(filterEventDescriptor.getStart().get());
+        } else if (filterEventDescriptor.getEnd().isPresent()) {
+            filterTiming = x -> x.isBetweenStartEnd(LocalDateTime.now(), filterEventDescriptor.getEnd().get());
         }
         Predicate<Event> finalFilterName = filterName;
-        Predicate<Event> finalFilterStart = filterStart;
-        Predicate<Event> finalFilterEnd = filterEnd;
-        Predicate<Event> filter = x -> finalFilterName.test(x) && finalFilterStart.test(x) && finalFilterEnd.test(x);
+        Predicate<Event> finalFilterTiming = filterTiming;
+        Predicate<Event> filter = x -> finalFilterName.test(x) && finalFilterTiming.test(x);
         model.updateFilteredEventList(filter);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredEventList().size()),
