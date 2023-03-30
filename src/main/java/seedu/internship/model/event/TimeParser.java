@@ -67,7 +67,15 @@ public class TimeParser implements Comparable<TimeParser> {
     }
 
     public boolean isBetween(TimeParser start, TimeParser end) {
-        return this.ldt.isBefore(end.ldt) && this.ldt.isAfter(start.ldt);
+        return this.ldt.compareTo(end.ldt) <= 0 && this.ldt.compareTo(start.ldt) >= 0;
+    }
+
+    public boolean isBetween(LocalDateTime now, TimeParser end) {
+        return this.ldt.compareTo(end.ldt) <= 0 && this.ldt.compareTo(now) >= 0;
+    }
+
+    public boolean isAfterOrEquals(TimeParser timeParser) {
+        return this.ldt.compareTo(timeParser.ldt) >= 0;
     }
 
     public boolean isEqualTime(TimeParser time) {

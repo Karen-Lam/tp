@@ -128,6 +128,18 @@ public class Event {
         return !(getStart().getLd().isBefore(start) || getStart().getLd().isAfter(end));
     }
 
+    public boolean isBetweenStartEnd(Start otherStart, End otherEnd) {
+        return this.start.isBetween(otherStart, otherEnd) || this.end.isBetween(otherStart, otherEnd);
+    }
+
+    public boolean isBetweenStartEnd(LocalDateTime now, End otherEnd) {
+        return this.start.isBetween(now, otherEnd) || this.end.isBetween(now, otherEnd);
+    }
+
+    public boolean isAfterOrEquals(Start otherStart) {
+        return this.start.isAfterOrEquals(otherStart);
+    }
+
     /**
      * Returns true if both events have the same identity and data fields.
      * This defines a stronger notion of equality between two equals.
