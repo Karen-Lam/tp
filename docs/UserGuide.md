@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-## Table of Contents
+## **Table of Contents**
 * Table of Contents
 {:toc}
 
@@ -25,9 +25,10 @@ With TinS, you can conveniently and efficiently manage, coordinate and keep trac
 all in one place.
 
 **Notable Features**
-  * Finding a particular internship application in TinS using keywords: `find`
-  * Calendar View: `calendar`
-  * Finding all clashing events: `clash`
+  * Finding a particular internship application in TinS using keywords: [`find`](#finding-internships-find)
+  * Finding a particular event in TinS using keywords: [`event find`](#finding-a-particular-event--event-find)
+  * Calendar View: [`calendar`](#opens-the-calendar-page--calendar)
+  * Finding all clashing events: [`clash`](#finding-all-clashing-events--clash)
 
 
 <div style="page-break-after: always;"></div>
@@ -79,7 +80,7 @@ Example: `list`, `POSTIION`, `data/internshipcatalogue.json`
 
 <div style="page-break-after: always;"></div>
 
-## Quick Start
+## **Quick Start**
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -108,7 +109,6 @@ Example: `list`, `POSTIION`, `data/internshipcatalogue.json`
    ![Ui](images/ug/home_page.png)
 
    <div markdown="span" class="alert alert-success">
-   
         :bulb: **Tip:** The default TinS application contains some sample data. If you are new to TinS, these sample
         data can be useful for trying out the various commands of TinS. To remove all sample data, use the 
         <code>deleteall</code>.
@@ -160,13 +160,13 @@ In TinS, an internship application is stored as an **Internship**. An Internship
 
 <div markdown="span" class="alert alert-primary">
 
-:information_source: **Info:** Each Internship is **uniquely identifiable** by a **combination of its `POSITION` and
-`COMPANY`**. `POSITION` and `COMPANY` fields are **case-insensitive**. <br>
+:information_source: **Info:** Each Internship is **uniquely identifiable** by a **combination** of its `POSITION` and
+`COMPANY`. `POSITION` and `COMPANY` fields are **case-insensitive**. <br>
 
 Example: The following internships will be identified as same internship in TinS.
 
-* Internship with `POSITION` as `Software Engineer` and `COMPANY` as `Grab`
-* Internship with `POSITION` as `Software ENGINEER` and `COMPANY` as `GRAB`
+    * Internship with `POSITION` as `Software Engineer` and `COMPANY` as `Grab`
+    * Internship with `POSITION` as `Software ENGINEER` and `COMPANY` as `GRAB`
 
 </div>
 
@@ -280,7 +280,7 @@ their associated prefixes.
 pertaining to the associated field. <br>
 
 Example: If you input a `DESCRIPTION` field as `d/This is a my description p/field`, TinS would recognise the 
-sequence ` p/` as an indicator for the `POSITION` field. Hence, the above input would be recognised as an input with
+sequence <code> p/</code> as an indicator for the `POSITION` field. Hence, the above input would be recognised as an input with
 two fields, a `DESCRIPTION` field - `d/This is a description` and a `POSITION` field - `p/field`.
 </div>
 
@@ -316,8 +316,7 @@ two fields, a `DESCRIPTION` field - `d/This is a description` and a `POSITION` f
   <div markdown="span" class="alert alert-danger">
 
   :warning: **Warning:**  If an item without `...` after it is used more than once, TinS will identify the last
-  occurrence of that item as the input for that field.
-
+  occurrence of that item as the input for that field. <br>
   Example: `add p/POSITION c/COMPANY s/STATUS [d/DESCRIPTION] [t/TAG]...` means that the item, `p/POSITION` should only
   be used once. Hence, if 
   `add p/Software Engineer c/Grab s/0 d/This is a description t/IMPORTANT p/Data Analyst p/Machine Learning` is
@@ -341,7 +340,7 @@ two fields, a `DESCRIPTION` field - `d/This is a description` and a `POSITION` f
 
 <div style="page-break-after: always;"></div>
 
-## Features
+## **Features**
 
 ### Opens the Home Page : `home`
 
@@ -419,8 +418,8 @@ internship application to TinS, if there is a pre-existing internship in TinS wi
 Example: If TinS contains an Internship with `POSITION` as `Software Engineer` and `COMPANY` as `Grab`, the commands
 below will not be allowed. <br>
 
-* `add p/Software Engineer c/Grab s/0 d/`
-* `add p/SOFTWARE engineer c/Grab s/3 d/`
+    * `add p/Software Engineer c/Grab s/0 d/`
+    * `add p/SOFTWARE engineer c/Grab s/3 d/`
 
 </div>
 
@@ -534,7 +533,7 @@ internship application with `POSITION` as `Data Analytics` and `COMPANY` as `Goo
 <div style="page-break-after: always;"></div>
 
 ### Event Commands
-This section contains commands to manage your [events](#event) associated with each internship application.
+This section contains commands to manage your [events](#events) associated with each internship application.
 
 #### Adding an Event to an Internship Application : `event add`
 
@@ -614,7 +613,7 @@ Example: `event find na/interview st/14/04/2023 1400` returns a list of events w
 Displays all events with clashing timings in the Display Panel.
 
 * Clashing Event are arranged by date.
-* Two events are clashing if they are *Interview* events and have overlapping start and end timings.
+* Two events are clashing if they are **Interview** events and have overlapping start and end timings.
 * Clicking on a particular date, you will be able to see all events with clashing timings occuring on that date.
 
 Format: `clash`
@@ -757,7 +756,7 @@ listed in the List Panel
 
 <tr>
 <td><b>Find Event</b></td>
-<td><<code>event add [na/EVENT_NAME] [st/START_DATETIME] [en/END_DATETIME]</code><br>
+<td><code>event add [na/EVENT_NAME] [st/START_DATETIME] [en/END_DATETIME]</code><br>
 E.g. <code>event find na/Technical Interview st/20/03/2023 1400</code></td>
 </tr>
 
@@ -783,7 +782,7 @@ E.g. <code>event find na/Technical Interview st/20/03/2023 1400</code></td>
 
 </table>
 
-## Acknowledgements
+## **Acknowledgements**
 * The Intern's Ship is written in Java 11.
 * The Intern's Ship uses the following libraries: [JavaFX](https://openjfx.io/),
   [Jackson](https://github.com/FasterXML/jackson), [Junit5](https://github.com/junit-team/junit5),
