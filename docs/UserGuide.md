@@ -71,6 +71,8 @@ Commands, fields, prefixes and file paths are highlighted in the User Guide.
 
 Example: `list`, `POSTIION`, `data/internshipcatalogue.json`
 
+<div style="page-break-after: always;"></div>
+
 ### How to use the User Guide
 * If you **have not installed TinS** or **are new to TinS**, [Quick Start](#quick-start) will guide you through the
   process of installing TinS and provide you with a brief introduction to TinS.
@@ -147,9 +149,13 @@ TinS command can be found [here](#features).
 5. **Location Bar**: This location bar states the location in which your TinS data file is currently stored on your
    local device
 
+<div style="page-break-after: always;"></div>
+
 ### How your Internship Application Data is Organised in TinS
 
 ![data organisation](images/ug/ug-internship-organisation.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Internships
 
@@ -161,13 +167,10 @@ In TinS, an internship application is stored as an **Internship**. An Internship
 <div markdown="span" class="alert alert-primary">
 
 :information_source: **Info:** Each Internship is **uniquely identifiable** by a **combination** of its `POSITION` and
-`COMPANY`. `POSITION` and `COMPANY` fields are **case-insensitive**. <br>
+`COMPANY`. `POSITION` and `COMPANY` fields are **case-insensitive**. <br><br>
 
-Example: The following internships will be identified as same internship in TinS.
-
-    * Internship with `POSITION` as `Software Engineer` and `COMPANY` as `Grab`
-    * Internship with `POSITION` as `Software ENGINEER` and `COMPANY` as `GRAB`
-
+Example: An Internship with `POSITION` as `Software Engineer` and `COMPANY` as `Grab` will be identified to be the
+same internship as an Internship with `POSITION` as `Software ENGINEER` and `COMPANY` as `GRAB`.
 </div>
 
 * `STATUS` : The Status of your Application. This is an **Integer value** from **0 to 3**. Here are the statuses for the
@@ -193,6 +196,8 @@ Example: The following internships will be identified as same internship in TinS
 
 An Internship can also store **zero or more** **Event**.
 
+<div style="page-break-after: always;"></div>
+
 #### Events
 
 In TinS, an **Event** can be used to represent a **Deadline** or an **Interview** associated to an Internship. An Event
@@ -211,6 +216,8 @@ has the following fields:
 * `END_DATETIME`: The Ending Time of an Event (in the format: DD/MM/YYYY HHMM).
   * If the Event is a **Deadline**, the `START_DATETIME` will be the same as the `END_DATETIME`.
 * `EVENT_DESCRIPTION`: Description of the Event (e.g. Venue, Things to take note of). This field is optional.
+
+<div style="page-break-after: always;"></div>
 
 ### Information about Crafting Your Command
 This section contains information on how to craft your command.
@@ -277,12 +284,14 @@ their associated prefixes.
 <div markdown="span" class="alert alert-danger">
 
 :warning: **Warning:**  The sequence of a blackspace and a prefix should be reserved solely for indicating information
-pertaining to the associated field. <br>
+pertaining to the associated field. <br><br>
 
 Example: If you input a `DESCRIPTION` field as `d/This is a my description p/field`, TinS would recognise the 
 sequence <code> p/</code> as an indicator for the `POSITION` field. Hence, the above input would be recognised as an input with
 two fields, a `DESCRIPTION` field - `d/This is a description` and a `POSITION` field - `p/field`.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 #### Notes about the Command Format
 
@@ -316,7 +325,8 @@ two fields, a `DESCRIPTION` field - `d/This is a description` and a `POSITION` f
   <div markdown="span" class="alert alert-danger">
 
   :warning: **Warning:**  If an item without `...` after it is used more than once, TinS will identify the last
-  occurrence of that item as the input for that field. <br>
+  occurrence of that item as the input for that field. <br><br>
+
   Example: `add p/POSITION c/COMPANY s/STATUS [d/DESCRIPTION] [t/TAG]...` means that the item, `p/POSITION` should only
   be used once. Hence, if 
   `add p/Software Engineer c/Grab s/0 d/This is a description t/IMPORTANT p/Data Analyst p/Machine Learning` is
@@ -346,6 +356,8 @@ two fields, a `DESCRIPTION` field - `d/This is a description` and a `POSITION` f
 
 Opens the Home Page in the Display Panel.
 
+**Format**: `home`
+
 <div markdown="span" class="alert alert-success">
 
     :bulb: **Tip:**  The `home` command can also be used to refresh the Home Page in the Display Panel.
@@ -354,7 +366,7 @@ Opens the Home Page in the Display Panel.
 * Home Page reminds you of your upcoming deadlines and interviews, occurring either today or tomorrow, and the command
   format for useful commands, by conveniently displaying them in the Display Panel.
 
-Example: `home`
+**Example**:
 
 ![home_page](images/ug/home_page.png)
 
@@ -365,6 +377,8 @@ Example: `home`
 Calculates statistics based on your current internship applications and displays personalized statistics in the
 Display Panel.
 
+**Format**: `stats`
+
 <div markdown="span" class="alert alert-success">
 
     :bulb: **Tip:**  The `stats` command can also be used to refresh the Statistic Page in the Display Panel.
@@ -373,7 +387,7 @@ Display Panel.
 * Statistics Page shows you a summary of how your internship-seeking journey has been. The pie chart provides you with a
   visual representation of the current status of your internship applications.
 
-Example: `stats`
+**Example**:
 
 ![stats_page](images/ug/stats_page.png)
 
@@ -382,6 +396,8 @@ Example: `stats`
 ### Opens the Calendar Page : `calendar`
 
 Displays a calendar view of all your events in the Display Panel.
+
+**Format**: `calendar`
 
 <div markdown="span" class="alert alert-success">
 
@@ -396,7 +412,7 @@ Displays a calendar view of all your events in the Display Panel.
     their start and end timings.
 </div>
 
-Example: `calendar`
+**Example**:
 
 ![calendar_page](images/ug/calendar_page.png)
 
@@ -406,21 +422,17 @@ Example: `calendar`
 
 Adds an internship and its details to TinS.
 
-Format: `add p/POSITION c/COMPANY_NAME s/APPLICATION_STATUS [d/DESCRIPTION] [t/TAG] ...`
+**Format**: `add p/POSITION c/COMPANY_NAME s/APPLICATION_STATUS [d/DESCRIPTION] [t/TAG] ...`
 
 <div markdown="span" class="alert alert-primary">
 
-:information_source: **Info:** In TinS, each internship stored must be unique (no duplicates). Since an internships
-is uniquely identified by the combination of `POSITION` and `COMPANY` fields, you would not be able to `add` an
-internship application to TinS, if there is a pre-existing internship in TinS with the same `POSITION` and `COMPANY`
-(comparison is case-insensitive).
-
-Example: If TinS contains an Internship with `POSITION` as `Software Engineer` and `COMPANY` as `Grab`, the commands
-below will not be allowed. <br>
-
-    * `add p/Software Engineer c/Grab s/0 d/`
-    * `add p/SOFTWARE engineer c/Grab s/3 d/`
-
+    :information_source: **Info:** In TinS, each internship stored must be unique (no duplicates). Since an internships
+    is uniquely identified by the combination of `POSITION` and `COMPANY` fields, you would not be able to `add` an
+    internship application to TinS, if there is a pre-existing internship in TinS with the same `POSITION` and `COMPANY`
+    (comparison is case-insensitive). <br><br>
+ 
+    Example: If TinS contains an Internship with `POSITION` as `Software Engineer` and `COMPANY` as `Grab`, the commands
+    `add p/Software Engineer c/Grab s/0` and `add p/SOFTWARE engineer c/Grab s/3` are not allowed.
 </div>
 
 <div markdown="span" class="alert alert-primary">
@@ -429,7 +441,7 @@ below will not be allowed. <br>
 `t/important`, TinS will automatically save it as `t/IMPORTANT` for you.
 </div>
 
-Example: `add p/Software Engineer c/Grab s/1 d/Requires knowledge of Python and Java t/Important t/Priority`
+**Example**: `add p/Software Engineer c/Grab s/1 d/Requires knowledge of Python and Java t/Important t/Priority`
 
 ![Ui](images/ug/ug-add.png)
 
@@ -439,10 +451,12 @@ Example: `add p/Software Engineer c/Grab s/1 d/Requires knowledge of Python and 
 
 List all the internships in List panel.
 
+**Format**: `list`
+
 * After keying in the `list` command, TinS displays **all** the Internships stored in TinS in the List panel.
 * Only the `POSITION`, `COMPANY`, `STATUS` and `TAG` are display in the List Panel for each Internship.
 
-Example: `list`
+**Example**:
 
 ![internship_list_panel](images/ug/ug-list.png)
 
@@ -452,7 +466,7 @@ Example: `list`
 
 Finds an Internships by their fields (`POSITION`, `COMPANY`, `STATUS`, `TAG`).
 
-Format: `find [p/POSITION] [c/COMPANY] [s/STATUS] [t/TAG]...`
+**Format**: `find [p/POSITION] [c/COMPANY] [s/STATUS] [t/TAG]...`
 
 * Choose the fields you would like to filter the Internship Catalogue by. At least one field must be chosen, but more
   than one field can be chosen.
@@ -464,14 +478,14 @@ Format: `find [p/POSITION] [c/COMPANY] [s/STATUS] [t/TAG]...`
 
 <div markdown="span" class="alert alert-primary">
 
-    :information_source: **Info:** If your command is `find t/` 
+    :information_source: **Info:** If your command is `find t/`, TinS will return all internships with no `TAG` field.
 </div>
 
-* After keying in your `find` command, TinS will find related internships based on your chosen fields and
-  provided keywords, displaying them in the List Panel.
+* After keying in your `find` command, TinS will find internships that fulfil all your requirements given,
+  displaying them in the List Panel.
 * To view all Internship in TinS again, simply enter the `list` command.
 
-Example: TinS has 7 internship listings. `find c/tech t/important` would return the list of internships with `COMPANY`
+**Example**: TinS has 7 internship listings. `find c/tech t/important` would return the list of internships with `COMPANY`
 containing the word "gov" and `TAG` as `IMPORTANT`.
 
 ![find_internship](images/ug/ug-find.png)
@@ -482,13 +496,13 @@ containing the word "gov" and `TAG` as `IMPORTANT`.
 
 View more details of the internship application selected by ID.
 
-Format: `select ID`
+**Format**: `select ID`
 
 * `ID`: The number of the selected internship in the List Panel.
 * After keying in the `select` command, TinS will return the all details of the selected internship in the Display
   Panel.
 
-Example: `select 2`
+**Example**: `select 2`
 
 ![select_internship](images/ug/ug-select.png)
 
@@ -498,14 +512,14 @@ Example: `select 2`
 
 Edit details of the internship application selected by ID.
 
-Format: `edit ID [p/POSITION] [c/COMPANY] [s/STATUS] [d/DESCRIPTION] [t/TAG] ...`
+**Format**: `edit ID [p/POSITION] [c/COMPANY] [s/STATUS] [d/DESCRIPTION] [t/TAG] ...`
 
 * `ID`: The number of the selected internship in the List Panel.
 * Choose one or more fields to edit.
 * After keying in the `edit` command, along with your new edited fields, TinS will update the corresponding fields of
   the internship application accordingly.
 
-Example:
+**Example**:
 
 After keying in the `edit` command followed by an existing `ID` and the fields `STATUS` and `DESCRIPTION`,
 TinS will update the `STATUS` and `DESCRIPTION` fields of the internship application with the specified
@@ -520,12 +534,12 @@ following results.
 
 Deletes an internship along with its details by ID.
 
-Format: `delete ID`
+**Format**: `delete ID`
 
 * `ID`: The number of the selected internship in the List Panel.
 * Deletes the internship application at the specified `ID` in the List Panel.
 
-Example: `delete 3` deletes the 3rd internship listed in the List Panel. In this example, the
+**Example**: `delete 3` deletes the 3rd internship listed in the List Panel. In this example, the
 internship application with `POSITION` as `Data Analytics` and `COMPANY` as `Google` is removed.
 
 ![delete_internship](images/ug/ug-delete.png)
@@ -547,10 +561,11 @@ Adds an Event along with its details to the selected internship.
 <div markdown="span" class="alert alert-primary">
 
 :information_source: **Info:** Add event does not allow you to add duplicate events. Two events are considered
-duplicates if they have the same `EVENT_NAME`, `START_DATETIME` and `END_DATETIME`.
+duplicates if they have the same `EVENT_NAME`, `START_DATETIME` and `END_DATETIME`. `EVENT_NAME` is
+case-sensitive.
 </div>
 
-Format: `event add na/EVENT_NAME [st/START_DATETIME] en/END_DATETIME [de/EVENT_DESCRIPTION]`
+**Format**: `event add na/EVENT_NAME [st/START_DATETIME] en/END_DATETIME [de/EVENT_DESCRIPTION]`
 
 * `START_DATETIME` and `END_DATETIME` fields need to be in the format : DD/MM/YYYY HHMM
 
@@ -559,7 +574,7 @@ Format: `event add na/EVENT_NAME [st/START_DATETIME] en/END_DATETIME [de/EVENT_D
 :information_source: **Info:** `event add` enables you to add events even if the events occurred in the past.
 </div>
 
-Examples:
+**Examples**:
 1. If you would like to add an Internship Application Submission Deadline:
   `event add na/Application Submission Deadline en/14/04/2023 2359 de/Via Talent Connect`
 2. If you would like to add an Interview:
@@ -578,10 +593,10 @@ Deletes selected Event along with its details from the selected internship.
 :information_source: **Info:** Before deleting an event, you have to select an internship using `select ID`.
 </div>
 
-Format: `event delete ID`
+**Format**: `event delete ID`
 * `ID`: The ID of the selected event in the list
 
-Examples: `event delete 1` entered after `select 1` deletes the first event in the first internship.
+**Examples**: `event delete 1` entered after `select 1` deletes the first event in the first internship.
 
 ![event delete](images/ug/ug-eventdelete.png)
 
@@ -591,7 +606,7 @@ Examples: `event delete 1` entered after `select 1` deletes the first event in t
 
 Finds events based on certain filters.
 
-Format: `event add [na/EVENT_NAME] [st/START_DATETIME] [en/END_DATETIME]`
+**Format**: `event add [na/EVENT_NAME] [st/START_DATETIME] [en/END_DATETIME]`
 
 * Choose the fields you would like to filter the events by. At least one field must be chosen, but more
   than one field can be chosen.
@@ -599,9 +614,10 @@ Format: `event add [na/EVENT_NAME] [st/START_DATETIME] [en/END_DATETIME]`
   `EVENT_NAME` field. This search case-insensitive.
 * If your chosen field is `START_DATETIME` and `END_DATETIME`, enter a `DATETIME` in the format DD/MM/YYYY HHMM. 
   TinS will find events with the corresponding `START_DATETIME` or `END_DATETIME`.
-* The results of `event find` will be displayed in the Display Panel.
+* After keying in your `event find` command, TinS will find events that fulfil all your requirements given,
+  displaying them in the Display Panel.
 
-Example: `event find na/interview st/14/04/2023 1400` returns a list of events with `EVENT_NAME` containing the keyword
+**Example**: `event find na/interview st/14/04/2023 1400` returns a list of events with `EVENT_NAME` containing the keyword
 "interview" and starting time 14 April 2023, 2pm.
 
 ![event_find](images/ug/ug-eventfind.png)
@@ -616,9 +632,9 @@ Displays all events with clashing timings in the Display Panel.
 * Two events are clashing if they are **Interview** events and have overlapping start and end timings.
 * Clicking on a particular date, you will be able to see all events with clashing timings occuring on that date.
 
-Format: `clash`
+**Format**: `clash`
 
-Example:
+**Example**:
 
 ![clash_function](images/ug/ug-clash.png)
 
@@ -653,13 +669,17 @@ all internship application and events in TinS immediately. Hence, you are advise
 
 </div>
 
-Format: `deleteall`
+**Format**: `deleteall`
+
+<div style="page-break-after: always;"></div>
 
 ### Getting Help : `help`
 
 Provides you with a link to helpful instructions on how to use TinS.
 
-Format: `help`
+**Format**: `help`
+
+**Example**:
 
 ![help](images/ug/helpMessage.png)
 
@@ -667,7 +687,7 @@ Format: `help`
 
 Exits and closes the TinS application.
 
-Format: `exit`
+**Format**: `exit`
 
 ### Saving the data
 
@@ -675,8 +695,6 @@ The Intern Ship’s data is saved in the hard disk automatically after any comma
 There is no need to save manually.
 
 <div style="page-break-after: always;"></div>
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Command Summary**
 
@@ -781,6 +799,8 @@ E.g. <code>event find na/Technical Interview st/20/03/2023 1400</code></td>
 </tr>
 
 </table>
+
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 * The Intern's Ship is written in Java 11.
