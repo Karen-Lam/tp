@@ -2,6 +2,7 @@
 layout: page
 title: Developer Guide
 ---
+## **Table of Contents**
 * Table of Contents
 {:toc}
 
@@ -9,9 +10,40 @@ title: Developer Guide
 
 <div style="page-break-after: always;"></div>
 
+<h1 align="center">
+    <b>The Intern's Ship - Developer Guide</b>
+</h1>
+
+<p align="center">
+    <img src="images/ship.png" alt="logo" width="90"><br>
+</p>
+
+## **Introduction**
+
+Designed with **internship-seeking university students** in mind, **The Intern’s Ship (TinS)** aims to make
+managing internship applications fuss-free. While being optimised for use via a Command Line Interface (CLI),
+TinS also offers a Graphic User Interface (GUI) for visual display of data.
+
+At its core, TinS is an internship management tool. It comes with features designed to make keeping track of their internship applications an easier and streamlined process. For example, TinS provides standardized fields for entry of an internship (e.g. Position, Company, Descrption, Events and etc.) and a search feature that finds internships based on these fields. Features such as `clash`, absolves user of the need to manually identify clashes between important dates.  
+
+The ultimate goal of TinS is to allow students to conveniently and efficiently manage, coordinate and keep track of your internship applications all in one place. 
+
+
+### Objective of Developer's Guide
+
+The aim of the Developer's Guide is to provide you (a potential developer!) with an overarching view of the application's architecture and inter-dependent functions of each component. You will also read about how notable features are implemented as well as the rationales behind the implementation. Also, it will outline the project requirements, goals, and constraints so to ensure that its developers are working towards the same objectives. 
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## **Acknowledgements**
 
-* Our in-app calendar display makes use JavaFX controls from the [CalendarFX](https://github.com/dlsc-software-consulting-gmbh/CalendarFX) library, an open source calendar framework for JavaFX 8. 
+* The Intern's Ship is written in Java 11.
+* The Intern's Ship uses the following libraries: [JavaFX](https://openjfx.io/),
+  [Jackson](https://github.com/FasterXML/jackson), [Junit5](https://github.com/junit-team/junit5),
+  [CalendarFX](https://github.com/dlsc-software-consulting-gmbh/CalendarFX)
+* The Intern's Ship is adapted from [addressbook-level3](https://github.com/se-edu/addressbook-level3)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -93,7 +125,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 <p align="center">
 
-<img src="images/UiClassDiagram.png" width="400" />
+<img src="images/UiClassDiagram.png" width="650" />
 
  </p>
  
@@ -108,6 +140,11 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Internship` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+<br /> 
+
+**`Page` class**
+
 The abstract `Page` class represents the part of the GUI that displays information requested by the user. This may include details of an internship, existing clashes and etc. Note that a `Page` differs from `ResultDisplay`, which outputs the outcome of a command (e.g. success or failure) keyed in by the user.
 
 Different types of information are rendered by different components, each of which is represented by their own concrete `Page` subclasses, such as `InternshipInfoPage`, `ClashesInfoPage` and etc. 
@@ -116,9 +153,13 @@ The *Class Diagram* below outlines the different concrete subclasses of `Page` a
 
 <p align="center">
 
-<img src="images/PageClasses.png" width="350" />
+<img src="images/PageClasses.png" width="650" />
+  
+</p>
 
- </p>
+<div style="page-break-after: always;"></div>
+
+ <br /> 
 
 **How a `Page` is generated** 
 
@@ -126,7 +167,7 @@ When the user executes a command, `Page` factory method `of` will be called and 
 
 <p align="center">
 
- <img src="images/PageSequenceDiagram.png" width="400" />
+ <img src="images/PageSequenceDiagram.png" width="800" />
 
  </p>
  
@@ -151,22 +192,28 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add an Internship).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+<br /> 
+
 The *Sequence Diagram* below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 <p align="center">
 
-<img src="images/DeleteSequenceDiagram.png" width="550"/>
+<img src="images/DeleteSequenceDiagram.png" width="700"/>
 
  </p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+<div style="page-break-after: always;"></div>
+<br /> 
+
 The *Class Diagram* below outlines classes in `Logic` used for parsing a user command:
 
 <p align="center">
 
-<img src="images/ParserClasses.png" width="300"/>
+<img src="images/ParserClasses.png" width="400"/>
 
  </p>
  
@@ -196,6 +243,7 @@ The `Model` component,
 
 
 **Relationship Between `Internship` and `Event` entities**
+
 Events cannot exist without its corresponding internship, thus there exists a composite relationship between the two.
 Also, to make insertions and deletions of events easier, each event instance stores the internship instance it is
 associated with. Due to this, extra precautions are taken during internship deletions, making sure the corresponding
@@ -203,7 +251,7 @@ events are deleted as well.
 
 <p align="center">
 
-<img src="images/InternshipEventModelClassDiagram.png" width="250" />
+<img src="images/InternshipEventModelClassDiagram.png" width="00" />
 
  </p>
  
@@ -228,6 +276,8 @@ treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
 that belong to the `Model`)
 
+<div style="page-break-after: always;"></div>
+
 ### Common classes
 
 Classes used by multiple components are in the [`seedu.internship.commons`](https://github.com/AY2223S2-CS2103T-W11-2/tp/tree/master/src/main/java/seedu/internship/commons) package.
@@ -238,9 +288,13 @@ Classes used by multiple components are in the [`seedu.internship.commons`](http
 
 ## **Implementation**
  
-This section describes some noteworthy details on how certain features are implemented.
+The following section describes some noteworthy details on how certain features are implemented.
 
 ### Selecting an `Internship`: `select` command
+
+#### Purpose of `select` command
+
+In TinS, for all `Internship`-related commands (e.g. `add`, `event add`, `delete` and etc.), the user has to select an existing `Internship` as the target of the command. This selection action is done through the `select` command.   
 
 #### Implementation
 
@@ -270,26 +324,32 @@ The following *Sequence Diagram* shows how the `select` command works:
 
 <p align="center">
 
-<img src="images/SelectSequenceDiagram.png" width="550" />
+<img src="images/SelectSequenceDiagram.png" width="700" />
 
 </p>
  
 Note: The lifeline for `SelectCommand` should end at the destroy marker(X) but due to a limitation of PlantUML, the
 lifeline reaches the end of diagram.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding `Event` to an `Internship`: `event add` command
 
-The `event add` command allows users to add instances of `Event` to a selected `Internship`.
+#### Purpose of `event add` command
+
+An `Internship` may contain 1 or more `Event`. Some examples of `Event` include interviews, deadline for submissions and etc. The `event add` command allows users to add instances of `Event` to a selected `Internship`.
 
 #### Implementation
 
-Below is an example usage. 
+`event add` command is a `Event`-related command that extends `Command` and returns a `CommandResult` in the `execute()` method. `Event`-related command refers to 2-word commands that has `event` as the first word. These commands are additionally parsed by `EventCatalogueParser` after being parsed by `InternshipCatalogueParser`.
+
+Below is an example usage of `event add`. 
 
 Step 1. User selects the `Internship` they want to add the event to by executing `select <id>`, where `<id>` refers to the index of the `Internship` on the list.
 
 Step 2. User executes `event add na/<event name> st/<event start datetime> en/<event end datetime> de/<event description>` if they want to add an `Event` to the selected `Internship`.
 
-  * User executes ` event add na/<event name> en/<event end datetime> de/<event description>` instead if they want to add a deadline to their selected internship. A deadline is simply an `Event` with only the end date.
+  * User executes `event add na/<event name> en/<event end datetime> de/<event description>` instead if they want to add a deadline to their selected internship. A deadline is simply an `Event` with only the end date.
 
 The *Activity Diagram* for the above logic flow is below: 
 
@@ -299,7 +359,7 @@ The *Activity Diagram* for the above logic flow is below:
 
   </p>
 
-Step 3. UI sends the Command to `Logic#InternshipCatalogueParser` , which uses the keyword `event` to identify this as an event command and sends the remainder of the command ` add na/... ` to `Logic#EventCatalogueParser`
+Step 3. UI sends the Command to `Logic#InternshipCatalogueParser` , which uses the keyword `event` to identify this as an `Event`-related command and sends the remainder of the command (i.e. ` add na/... `) to `Logic#EventCatalogueParser`
 
 Step 4. `EventCatalogueParser` identifies the add event command using the keyword `add`, then calls the `EventAddCommandParser` passing the arguments (everything except the keyword `and`) to be parsed.
 
@@ -307,7 +367,7 @@ Step 5. `EventAddCommandParser` tokenizes the arguments and creates an `Event` O
 
 Step 6. Then `LogicManager` passes the current `model` instance to `execute` method of  `EventAddCommand` instance.
 
-Step 7. `EventAddCommand` instance uses the model object to find the `seletedInternship` and passes it to the `Event` object to initialise the `internship` variable inside the `Event` object.
+Step 7. `EventAddCommand` instance uses the model object to find the `selectedInternship` and passes it to the `Event` object to initialise the `internship` variable inside the `Event` object.
 
 Step 8. `Event` object is then added to the `UniqueEventList` using the `addEvent` method of `model`.
 
@@ -315,17 +375,23 @@ The *Sequence Diagram* for the adding the `Event` is below:
 
 <p align="center">
  
-<img src="images/EventAddSequenceDiagram.png" width="550" />
+<img src="images/EventAddSequenceDiagram.png" width="700" />
 
 </p>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing all `Event` on a calendar: `calendar` command
+
+#### Purpose of `calendar` command
 
 The `calendar` command displays all Events under existing Internships in a calendar rendered by third-party JavaFX library CalendarFX.
 
 #### Implementation
 
-Given below is an example usage, and what happens at every step of the execution of the `calendar` command.
+The `calendar` command is a standard command that extends `Command` and returns a `CommandResult` in the `execute()` method.
+
+Given below is an example usage, and a trace-through of the execution of `calendar` command.
 
 Step 1. The user enters `calendar` command into the CommandBox.
 
@@ -343,7 +409,7 @@ Step 7. In `MainWindow`'s `executeCommand` method, `Page.of(CommandResult)` is c
 
 Step 8. `Page.of(CommandResult)` recognizes that `ResultType` of the `CommandResult` is `CALENDAR`, and creates a `CalendarPage` to be shown by calling its constructor. THe `ObservableList` of `Event` is passed to the constructor.
 
-Step 9. Within constructor of the `CalendarPage`, here is an outline of what happens under the hood:
+Step 9. Within constructor of the `CalendarPage`:
 * A `MonthPage` is created. It is a composite CalendarFX control responsible for displaying all `Event` in a month in grids.
 * The `MonthPage` is initialized with the current time and set up such that it updates its timing accordingly.
 * A `Calendar` is created. It is a CalendarFX class that stores our `Event` in the form of `Entry` (another CalendarFX class you will see again in a later step)
@@ -364,10 +430,61 @@ Step 8 till Step 11 are depicted in the *Sequence Diagram* below.
 
 To learn more about CalendarFX, you may visit its Developer Guide [here](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/).
 
+<div style="page-break-after: always;"></div>
+
+### View useful `Statistics`: `stats` command
+
+#### Purpose of `stats` command
+
+The `stats` command displays useful statistics based on `Internship` and `Event` data.
+
+#### Design considerations:
+
+**Aspect: How statistics are generated and used:**
+
+* **Alternative 1 (current choice):** Separate `Statistics` class. `Statistics` parses lists of `Internship` and `Event` to create specified `Datapoint` fields.
+  The `Statistics` is then passed into the `CommandResult`.
+    * Pros: Allows for easy expansion for more kinds of statistics to be shown by adding more `Datapoint` fields in `Statistics`.
+    * Cons: Difficult to implement.
+
+* **Alternative 2:** `StatsCommand` parses the lists of `Internship` and `Event` to create list of `Datapoint`.
+  The list of `Datapoint` is then passed into `CommandResult`.
+    * Pros: Easy to implement.
+    * Cons: Difficult to expand to add more kinds of statistics.
+
+#### Implementation
+
+The `stats` command is a standard command that extends `Comand` and returns a `CommandResult` in the `execute()` methods, which does the following:
+
+* Obtains a `ObservableList<Event>` and `ObservableList<Internship>` from `Model`, which are lists containing all `Events` and `Internships`.
+* Creates a `Statistics` object from those 2 lists.
+* Returns a `CommandResult` of `ResultType.STATS` containing the `Statistcs` object, to be passed to the UI for displaying.
+
+Given below is an example usage scenario and how the stats command behaves at each step.
+
+Step 1. The user enters the `stats` command into the CLI: `stats`.
+
+Step 2. `InternshipCatalogueParser` parses the input and extracts the command `select`, creating a `StatsCommand` and passes it to `LogicManager`
+
+Step 3. `LogicManager` calls the `execute()` method of the `StatSCommand` instance, which invokes `getFilteredInternshipList()` and `getFilteredEventList()` on `Model` to get a list of internships and events.
+
+Step 4. A `Statistics` object is created from the 2 lists. Which parses the list of `Internship` and `Event` to instantiate the appropriate `Datapoint` fields.
+
+Step 5. Finally, a `CommandResult` is created containing that `Statistics` instance, which is then returned to `LogicManager` for use in the UI.
+
+The following sequence diagram shows how the `stats` command works:
+
+<p align="center">
+
+<img src="images/StatsSequenceDiagram.png" width="700" />
+
+</p>
+
+<div style="page-break-after: always;"></div>
 
 ### View all clashing `Event`: `clash` command
 
-#### Purpose of `clash` Function
+#### Purpose of `clash` command
 
 The purpose of the `clash` command is for users to find events with clashing timings, enabling them to reschedule
 clashing events. 
@@ -376,11 +493,13 @@ In TinS, there are two kinds of events: **Interviews** and **Deadlines**. Having
 does not result in a clash. However, having multiple Interviews with overlapping timings would result in a clash in
 timing. Therefore, Interviews with overlapping timing would need to be picked up by the `clash` function.
 
-#### Design Considerations
+#### Design considerations:
 
-There were two possible ways of implementing the `clash` function:
+**Aspect: How statistics are generated and used:**
 
-1. Organising clash timing by Events: For each Event, event, stored in TinS, TinS will compare that particular Event will
+There were two possible ways of implementing the clash function:
+
+* **Alternative 1:** Organising clash timing by Events: For each Event, event, stored in TinS, TinS will compare that particular Event will
    all other Events, otherEvents. If there is a clash found, the otherEvent will be placed in a list. After comparison
    with all other Events, the event and its corresponding list will be added to a hash map. This is repeated for all
    Events in TinS. 
@@ -393,7 +512,7 @@ There were two possible ways of implementing the `clash` function:
      the list corresponding to event 1, and event 1 will be recorded in the list corresponding to event 2. This results
      in two records of the same clash.
 
-2. Organising clash timings by Date: For each day, list out all the Events with clashes in timing on that day.
+* **Alternative 2 (current choice):** Organising clash timings by Date: For each day, list out all the Events with clashes in timing on that day.
 
    Advantage:
    - No duplicated records of clashes.
@@ -411,7 +530,7 @@ duplicated records.
 
 The `clash` command feature is standard command that extends `Command` and returns a `CommandResult` in the
 `execute()` method. The `CommandResult` returns a `HashMap`, which contains mapping from a `LocalDate` to `List<Event>`.
-The `List<Event>` is the list of event with clashes on that particular date.
+The `List<Event>` is the list of events with clashes on that particular date.
 
 Given below is an example usage scenario and how the select command behaves at each step.
 
@@ -433,11 +552,15 @@ in the list. If there is a clash in the two events, `clashingTimings(Event)` is 
 dates on which the events clash. These dates are added to the `HashMap`, and the clashing events are appended to
 the list of events corresponding to those dates.
 
-![Clash](diagrams/ClashSequenceDiagram.png)
+<p align="center">
+
+<img src="images/ClashSequenceDiagram.png" width="700" />
+
+</p>
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<br />
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -471,42 +594,33 @@ the list of events corresponding to those dates.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
-| Priority | As a …​                                    | I want to …​                                          | So that I can…​                                                        |
-|----------|--------------------------------------------|-------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions                                | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person                                      |                                                                        |
-| `* * *`  | user                                       | delete a person                                       | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name                                 | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details                          | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name                                  | locate a person easily                                                 |
-| `* *`    | novice user                                | edit existing internship applications                 | update outdated information or add new details                         |
-| `*`      | intermediate user                          | quickly update the status of an internship            | keep the status of my applications up to date                          |
- | `* *`    | expert user                                | see all internship events that have clashes in dates  | try to reschedule some of those events                                 |
-| `* * *`  | new user                                   | see usage instructions                       | refer to instructions when I forget how to use the App                |
-| `* * *`  | Beginner user                              | add a new internship listing                 | record details of my internship application                           |
-| `* * *`  | Beginner user                              | delete a previously added internship listing | rid of dummy data or unwanted internship application                  |
-| `* * *`  | user                                       | find a person by name                        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details                 | minimize chance of someone else seeing them by accident               |
-| `*`      | user with many persons in the address book | sort persons by name                         | locate a person easily                                                |
-| `* * *`  | novice user                                | list all my intership applications easily | can confirm that my internship listing has been created
-| `* *`    | intermediate user                          | list all internships that have deadlines on a particular date	| avoid scheduling an interview on that day |
-| `* * *`  | intermediate user                          | view my list of internships sorted by my desired criteria/field (e.g. status, deadline, interview date) | Easily look up internships that I am concerned about |
-| `* *`    | expert user                                | see all internships that have not received updates in a long time | know which internships I need to follow up on |
+| Priority | As a …​                                    | I want to …​                                                                                            | So that I can…​                                                     |
+|----------|--------------------------------------------|---------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions                                                                                  | refer to instructions when I forget how to use the App              |
+| `* * *`  | beginner user                              | add a new internship listing                                                                            | record details of my internship application                         |
+| `* * *`  | beginner user                              | delete a previously added internship listing                                                            | rid of dummy data or unwanted internship application                |
+| `* *`    | user                                       | hide internship descriptions unless selected.                                                           | minimize chance of someone else seeing them by accident             |
+| `* *`    | novice user                                | edit existing internship applications                                                                   | update outdated information or add new details                      |
+| `*`      | intermediate user                          | quickly update the status of an internship                                                              | keep the status of my applications up to date                       |
+| `* *`    | expert user                                | see all internship events that have clashes in dates                                                    | try to reschedule some of those events                              |
+| `* * *`  | novice user                                | list all my intership applications easily                                                               | can confirm that my internship listing has been created             
+| `* *`    | intermediate user                          | list all internship events that have deadlines on a particular date	                                    | avoid scheduling an interview on that day                           |
+| `* * *`  | intermediate user                          | view my list of internships sorted by my desired criteria/field (e.g. status, deadline, interview date) | easily look up internships that I am concerned about                |
 
 
 ### Use cases
 
-(For all use cases below, the **System** is `TinS` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `TinS`)
 
-**Use case: Edit eventDescription of an Internship Application**
+#### Use case: Edit description of an internship application
 
 **MSS**
 
 1. User requests to list all internship applications.
-2. System shows a list of all internship applications
+2. System shows a list of all internship applications.
 3. User specifies the ID of the internship application he wishes to edit.
-4. System shows current eventDescription of the internship application and prompts user to input a new eventDescription to edit it.
-5. User inputs the new eventDescription of the internship application.
+4. System shows current description of the internship application and prompts user to input a new description to replace it.
+5. User inputs the new description of the internship application.
 6. System updates the internship application with the new details.
 
 Use Case ends.
@@ -519,117 +633,96 @@ Use Case ends.
 
 * 5a. User cancels the operation midway.
 
-    * 5a1. System retains the original eventDescription and does not edit the internship application.
+    * 5a1. System retains the original description and does not edit the internship application.
 
       Use case ends.
 
-* 5b. User inputs invalid eventDescription.
+* 5b. User inputs invalid description.
 
     * 5b1. System shows an error message.
-    * 5b2. System retains the original eventDescription and does not edit the internship application.
+    * 5b2. System retains the original description and does not edit the internship application.
 
       Use case resumes at step 4.
 
-**Use Case: Add an Internship Listing**
+#### Use Case: Add an internship listing
 
 **MSS**
 
-1. User requests to Add
-2. System asks the user for Internship Position
-3. User inputs the Internship Position
-4. System asks the user for Company Name
-5. User inputs the Company Name
-6. System asks the user for application status
-7. User inputs the Status
-8. System Confirms Internship Addition
-9. User confirms addition
-10. System adds the internship listing
+1. User requests to add an internship and provides details of the internship (i.e. position, company, application status, description and tag).
+2. System adds the internship listing.
 
 Use Case ends.
 
 **Extensions**
-* 7.a System asks User to add addition information
-* 7.a1 System ask User for Application Link
 
-    * 7.a2 User inputs Application link
+* 1a User inputs invalid parameter.
 
-    * 7.a3 System ask User for Contact details of Hiring Manager
+    * 1a1. System shows an error message.
+    
+    
 
-    * 7.a3 User inputs Contact details of Hiring Manager
-
-* 8a. User denies the addition of the listing
-      Use Case ends.
-
-**Use case: List all internship applications**
+#### Use case: List all internship applications
 
 **MSS**
 
-1.  User requests to list all internship applications saved on System.
-2.  System displays a list of internships.
-    Use case ends.
+1. User requests to list all internship applications saved on System.
+2. System displays a list of internships.
+    
+Use case ends.
 
-* 1a. User requests to list all internship applications that have not received updates in a long time.
-
-  * 1b1. System displays all internships that have not had a change in status in a week.
-
-    Use case ends.
+**Extensions**
 
 * 2a. The list is empty.
-    Use case ends.
+  
+    Use Case ends.
+  
 
-**Use Case: Delete Internship Listing**
+#### Use Case: Delete an internship listing
 
 **MSS**
 
-1. User requests to list internships inputted
-2. System shows a list all the inputted internships
-3. User requests to delete an internship listing
-4. System Confirms the listing User wants to delete
-5. User confirms the listing to be deleted
-6. System deletes the internship listing
+1. User requests to list internship applications saved on system.
+2. System shows a list all the internship applications saved on system.
+3. User requests to delete an internship listing by its index.
+4. System deletes the internship listing.
 
 Use case ends.
 
 **Extensions**
 
-* 4a. User decides to not delete the listing
-Use Case Ends.
+* 3a. User enters an invalid ID.
+    * 3a1. System will show an error message and not delete any listing.
+    
+       Use Case resumes at Step 3
 
-**Use case: List all internship applications with a deadline on a particular date**
+#### Use case: Find internship events by a desired criteria
 
 **MSS**
 
-1.  User requests to list all internship applications with an upcoming deadline on a particular date.
-2.  System prompts user to key in a date.
-3.  User inputs a date.
-4.  System displays the input date and a list of internships, with the target of the upcoming deadline (e.g. interview, online assessment)   highlighted.
-
-    Use case ends.
+1. User requests to find events by a desired criteria (i.e. event title, start timing and end timing).
+2. System displays the list of events that fulfills the criteria specified.
+ 
+Use case ends.
 
 **Extensions**
 
-* 3a. The date given by user is in the future (i.e. later than today).
+* 1a. The date given by user is invalid (i.e. not formatted correctly).
 
-  * 3a1. System displays an error message to inform the user that the input date is not valid and needs to be today's date and earlier.
-
-    Use case resumes from step 2.
-
-* 4a. The list is empty.
+  * 1a1. System displays an error message to inform the user that the input date is not valid.
+  
+* 2a. There are no internship events fulfilling specified criteria.
 
   Use case ends.
 
-* 4b. There are no internship applications with an upcoming deadline.
 
-
-**Use case: List internships by desired criteria**
+#### Use case: Find internships by desired criteria
 
 **MSS**
 
-1. User requests to list sorted internships
-2. System prompts user to choose a criteria to list internship by
-3. User inputs desired criteria
-4. System displays list of all internships sorted in order based on chosen
-   criteria
+1. User requests to find internships by desired criteria.
+2. System prompts user to choose a criteria to list internship by.
+3. User inputs desired criteria.
+4. System displays list of all internships sorted in order based on chosen criteria.
 
 **Extensions**
 
@@ -640,24 +733,24 @@ Use Case Ends.
 * 3a. The given criteria is invalid.
 
     * 3a1. TinS shows an error message.
+    
 
-  Use case ends.
-
-**Use case: View all clashes of internship Events.**
+#### Use case: View all clashes of internship events
 
 **MSS**
 
-1.  User requests to view all clashes of internship Event dates.
-2.  AddressBook shows a list of dates that have clashes and the Events that clashed.
+1.  User requests to view all clashes of internship event dates.
+2.  TinS shows a list of dates that have clashes and the events that clashed.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. There are no Event clashes.
+* 2a. There are no event clashes.
 
   Use case ends.
 
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -667,8 +760,6 @@ Use Case Ends.
 4. A user should be able to navigate the application solely using the keyboard (i.e. input new internships, scroll through
    internship listing via keyboard).
 
-*{More to be added}*
-
 <div style="page-break-after: always;"></div>
 
 ### Glossary
@@ -677,6 +768,11 @@ Use Case Ends.
 * **ID**: This is a key to uniquely identify each internship. It is auto-generated by TinS based on position and company name.
 * **Status**: This refers to the status of application.
 * **Position**: The name of the internship position/role.
+* **Company**: This refers to the hiring company for any internship.
+* **Description**: Additional details about the internship. For example, contact details of hiring manager, link to internship webpage, requirements of internship)
+* **Event**: Represents a Deadline or an Interview associated to an Internship.
+  * Deadline: An Event that only has an end timing (E.g. Internship Application Submission Deadline, Offer Acceptance Deadline)
+  * Interview: An Event that has both a start and end timing (E.g. Interview, Online Assessments)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -697,7 +793,7 @@ testers are expected to do more <b>exploratory</b> testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample internships. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -705,8 +801,6 @@ testers are expected to do more <b>exploratory</b> testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting an Internship
 
@@ -723,13 +817,4 @@ testers are expected to do more <b>exploratory</b> testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
 
